@@ -65,6 +65,6 @@ printboard :- printsquare(1), printsquare(2), printsquare(3), nl,
 clear :- retractall(player_o(_)), retractall(player_x(_)).
 
 % main goal
-play :- clear, repeat, getmove, respond.
+play :- clear, repeat, getmove, respond. % keeps executing until respond is true
 respond :- ordered_line(A, B, C), player_o(A), player_o(B), player_o(C), printboard, write('You won.'), nl.  % should never happen
 respond :- makemove, printboard, done.
