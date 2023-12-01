@@ -49,3 +49,12 @@ risky(C) :- player_o(D), line(C, D, E), empty(E).
 
 weak_build(A) :- player_x(B), line(A, B, C), empty(C), \+double_risky(C).
 double_risky(C) :- player_o(D), player_o(E), different(D, E), line(C, D, F), line(C, E, G), empty(F), empty(G).
+
+/*
+example running
+
+set the player positions in interactive environment
+
+assert(player_o(5))
+assert(player_o(1))
+*/

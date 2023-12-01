@@ -5,3 +5,11 @@
 
 member1(X, [X | _]) :- !.
 member1(X, [_ | T]) :- member1(X,T).
+
+
+cmember(X,L,N) :- X > N, !, member1(X,L).
+cmember(X,L,N) :- X =< N, member1(N,L).
+
+/*
+cmember(2,L,5)
+*/
