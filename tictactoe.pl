@@ -24,6 +24,7 @@ good(A) :- block_win(A).
 good(A) :- split(A).
 good(A) :- strong_build(A).
 good(A) :- weak_build(A).
+% if none of above sat, we just choose an empty square
 good(5).
 good(1).
 good(3).
@@ -34,12 +35,17 @@ good(4).
 good(6).
 good(8).
 
+% empty(A) is already a constraint from move(A)
 win(A) :- player_x(B), player_x(C), line(A, B, C).
 block_win(A) :- player_o(B), player_o(C), line(A, B, C).
 split(A) :- player_x(B), player_x(C), different(B, C), line(A, B, D), line(A, C, E), empty(D), empty(E).
+
 same(A,A).
 different(A,B) :- \+(same(A, B)).
+
 strong_build(A) :- player_x(B), line(A, B, C), empty(C), \+risky(C).
+% risky for player_x
 risky(C) :- player_o(D), line(C, D, E), empty(E).
+
 weak_build(A) :- player_x(B), line(A, B, C), empty(C), \+double_risky(C).
 double_risky(C) :- player_o(D), player_o(E), different(D, E), line(C, D, F), line(C, E, G), empty(F), empty(G).
